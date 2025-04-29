@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Proposal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #yesButton {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        #yesButton:hover {
+            background-color: #45a049;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: #ff4d4d;
+            border-radius: 25px 25px 0 0;
+            bottom: -70px;
+            animation: float 3s forwards;
+        }
+        @keyframes float {
+            0% {
+                bottom: -70px;
+                opacity: 1;
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question">Would you come out for a date with me, Chaitrika?</div>
+    <button id="yesButton">YES</button>
+
+    <script>
+        const yesButton = document.getElementById('yesButton');
+        let moveCount = 0;
+
+        yesButton.addEventListener('mouseover', () => {
+            if (moveCount < 5) {
+                const randomX = Math.floor(Math.random() * 200) - 100; // Random horizontal movement
+                const randomY = Math.floor(Math.random() * 20) - 10; // Slight vertical movement
+                yesButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                moveCount++;
+            } else {
+                showBalloons();
+            }
+        });
+
+        function showBalloons() {
+            for (let i = 0; i < 5; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = `${Math.random() * 100}vw`;
+                document.body.appendChild(balloon);
+            }
+            yesButton.disabled = true; // Disable the button after 5 moves
+        }
+    </script>
+
+</body>
+</html>
